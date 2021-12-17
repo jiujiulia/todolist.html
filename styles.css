@@ -4,10 +4,9 @@ body {
 
     justify-content: center;
     background-size: 100%;
-    
 }
 
-.todolist-cp {
+.todolist-panel {
     width: 30em;
     min-height: 40em;
 

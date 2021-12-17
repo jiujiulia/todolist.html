@@ -1,8 +1,7 @@
 
 
 
-let todoItems = [
-];
+let todoItems = [];
 
 let finishedItems = [];
 
@@ -15,6 +14,7 @@ function renderTodoItemList(todoItems, finishedItems) {
         let item = todoItems[i];
         let itemDiv = document.createElement("div");
         itemDiv.className = "todo-item";
+        
 
         let inputEl = document.createElement("input");
         inputEl.type = "checkbox";
@@ -23,13 +23,20 @@ function renderTodoItemList(todoItems, finishedItems) {
             finishedItems.push(item);
             todoItems.splice(i, 1);
 
-            console.log("finshed:", i, todoItems, finishedItems );
             renderTodoItemList(todoItems, finishedItems);
 
         });
 
         let titleEl = document.createElement("div");
         titleEl.className = "title";
+        titleEl.contentEditable = true;
+        
+        titleEl.addEventListener("input",(e)=>{
+            todoItems[i].title = titleEl.innerHTML
+
+            console.log(todoItems)
+            
+        })
 
         let importanceEl = document.createElement("div");
         importanceEl.className = "important-flag"
@@ -52,6 +59,14 @@ function renderTodoItemList(todoItems, finishedItems) {
 
         let deleteBtn = document.createElement("button");
         deleteBtn.innerText = "X";
+        deleteBtn.addEventListener("click", (e)=>{
+            console.log("delete:", item);
+            itemDiv.remove()
+            todoItems.splice(i,1)
+            renderTodoItemList(todoItems, finishedItems);
+
+            console.log(todoItems)
+        })
 
         titleEl.innerText = item.title;
 
@@ -102,33 +117,39 @@ function renderInputPane(todoItems) {
     let inputPaneEl = document.querySelector("#todolist > .input-pane");
 
     let addBtnEl = inputPaneEl.querySelector("#add-btn");
+   
     let hisBtnEl = inputPaneEl.querySelector("#his-btn");
 
     addBtnEl.addEventListener("click", (e)=>{
         let inputEl = inputPaneEl.querySelector("input");
-
+   
         todoItems.push({
             title: inputEl.value,
             isFinished: false,
             isImportance: false, 
         })
-        
+
         console.log("add a item: ", inputEl.value);
+        
+        
         renderTodoItemList(todoItems, finishedItems);
+
     });
 
     hisBtnEl.addEventListener("click", (e)=>{
         if (hisBtnEl.classList.contains("open")) {
             hisBtnEl.classList.remove("open");
+            
             renderTodoItemList(todoItems, finishedItems)
         } else {
             hisBtnEl.classList.add("open");
+            
             renderFinishedItemList(todoItems, finishedItems)
         }
     });
 
-    // let btnEl = document.querySelector("#todolist #add-btn");
 }
 
 renderInputPane(todoItems, finishedItems);
 renderTodoItemList(todoItems, finishedItems);
+
