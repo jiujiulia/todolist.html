@@ -1,0 +1,60 @@
+
+body {
+    display: flex;
+
+    justify-content: center;
+    background-size: 100%;
+}
+
+.todolist-cp {
+    width: 30em;
+    min-height: 40em;
+
+    border: 1px solid #dfd;
+    box-shadow: 2px 2px 2px #dfd275;
+
+}
+
+.input-pane {
+    display: flex;
+}
+
+.input-pane, .list-pane {
+    padding: 15px 1em;
+}
+
+.input-pane > input {
+    flex: 1 1 8em;
+}
+
+.list-pane > .todo-item {
+    display: flex;
+    margin: 1.5em 0;
+}
+
+.list-pane > .todo-item > .title {
+    flex: 1 1 8em;
+}
+
+.important-flag {
+    width: 2em;
+    text-align: center;
+    border: 1px solid #bbb;
+    color: #ccc;
+    font-size: 1em;
+    font-weight: 1000;
+
+    user-select: none;
+}
+
+.important-flag.open {
+    color: lightcoral
+}
+
+.input-pane  #his-btn {
+
+}
+
+.input-pane  #his-btn.open {
+    background-color: lightblue;
+}
